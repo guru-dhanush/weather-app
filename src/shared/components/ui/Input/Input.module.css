@@ -1,0 +1,47 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.full {
+  width: 100%;
+}
+
+.label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--muted-text);
+}
+
+.input {
+  padding: var(--space-3);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text);
+  font-size: 1rem;
+  transition: border-color 0.15s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.input::placeholder {
+  color: var(--muted-text);
+}
+
+.error {
+  border-color: #dc2626;
+}
+
+.helper {
+  font-size: 0.75rem;
+  color: var(--muted-text);
+}
+
+.errorText {
+  color: #dc2626;
+}

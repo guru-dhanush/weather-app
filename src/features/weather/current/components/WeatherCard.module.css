@@ -1,0 +1,50 @@
+.card {
+  background-color: var(--card-bg);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+  border: 1px solid var(--border);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+
+  max-width: 320px;
+  width: 100%;
+}
+
+.city {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.condition {
+  font-size: 0.875rem;
+  color: var(--muted-text);
+  text-transform: capitalize;
+}
+
+.main {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.temp {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+}
+
+.icon {
+  width: 64px;
+  height: 64px;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: var(--muted-text);
+}

@@ -1,24 +1,25 @@
 import { DEFAULT_LOCATION } from "@/shared/constant/constant";
+import type { Location } from "@/shared/type";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 export type LocationSource = "default" | "geo" | "search" | "favorite";
 
-export interface Location {
-  name?: string;
-  lat: number;
-  lon: number;
-  country?: string;
+export interface City extends Location {
+  name: string;
+  country: string;
+  icon: string;
+  temp: number;
+  condition: string;
 }
 
 interface WeatherStore {
   selectedLocation: Location;
   source: LocationSource;
-  favorites: Location[];
+  favorites: City[];
 
   setLocation: (location: Location, source: LocationSource) => void;
-  addFavorite: (location: Location) => void;
-  removeFavorite: (lat: number, lon: number) => void;
+  toggleFavorite: (city: City) => void;
   isFavorite: (lat: number, lon: number) => boolean;
 }
 
@@ -35,25 +36,20 @@ export const useAppStore = create<WeatherStore>()(
           source,
         }),
 
-      addFavorite: (location) =>
+      toggleFavorite: (City) =>
         set((state) => {
           const exists = state.favorites.some(
-            (fav) => fav.lat === location.lat && fav.lon === location.lon
+            (fav) => fav.lat === City.lat && fav.lon === City.lon
           );
 
-          if (exists) return state;
-
           return {
-            favorites: [...state.favorites, location],
+            favorites: exists
+              ? state.favorites.filter(
+                  (fav) => fav.lat !== City.lat || fav.lon !== City.lon
+                )
+              : [...state.favorites, City],
           };
         }),
-
-      removeFavorite: (lat, lon) =>
-        set((state) => ({
-          favorites: state.favorites.filter(
-            (fav) => fav.lat !== lat || fav.lon !== lon
-          ),
-        })),
 
       isFavorite: (lat, lon) => {
         return get().favorites.some(

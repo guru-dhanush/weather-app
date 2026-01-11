@@ -17,9 +17,9 @@ export interface ForecastItem {
 
 
 export interface DailyForecast {
-  date: string;          // YYYY-MM-DD
-  minTemp: number;       // °C
-  maxTemp: number;       // °C
+  date: string;        
+  minTemp: number;       
+  maxTemp: number;    
   condition: string;
   icon: string;
 }

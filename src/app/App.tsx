@@ -1,7 +1,7 @@
-import Dashboard from "@/pages/dashboard";
-import Layout from "@/shared/components/Layout";
+import Layout from "@/app/Layout";
 import { initLocation } from "@/shared/hooks/useCurrentLocation";
 import { useEffect } from "react";
+import WeatherPage from "@/pages/Weather";
 
 const App = () => {
   useEffect(() => {
@@ -10,7 +10,7 @@ const App = () => {
 
   return (
     <Layout>
-      <Dashboard />
+      <WeatherPage />
     </Layout>
   );
 };

@@ -20,7 +20,7 @@ interface WeatherStore {
   setUnit: (unit: WeatherUnit) => void;
 }
 
-export const useAppStore = create<WeatherStore>()(
+export const useWeatherStore = create<WeatherStore>()(
   persist(
     (set, get) => ({
       selectedLocation: DEFAULT_LOCATION,

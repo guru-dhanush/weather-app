@@ -1,10 +1,10 @@
-import { useAppStore } from "@/store/app.store";
+import { useWeatherStore } from "@/store/weather.store";
 import CurrentWeather from "./components/Weather";
 import { ErrorBoundary } from "@/shared/components/ErrorBoundary/ErrorBoundary";
 
 const Current = () => {
-  const selectedLocation = useAppStore((state) => state.selectedLocation);
-  const unit = useAppStore((state) => state.unit);
+  const selectedLocation = useWeatherStore((state) => state.selectedLocation);
+  const unit = useWeatherStore((state) => state.unit);
 
   return (
     <ErrorBoundary fallback={<div>Failed to load Current weather data</div>}>

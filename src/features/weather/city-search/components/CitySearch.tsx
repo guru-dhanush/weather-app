@@ -1,7 +1,7 @@
 import { useDebounce } from "@/shared/hooks/useDebounce";
 import { Autocomplete } from "@/shared/components/ui/autocomplete/Autocomplete";
 import { useCallback, useState } from "react";
-import { useAppStore } from "@/store/app.store";
+import { useWeatherStore } from "@/store/weather.store";
 import CityCard from "@/shared/components/CityCard/CityCard";
 import { useCitySearch } from "../hooks/useCitySearch";
 import { useFavorites } from "../../fovarite-cities/hook/useFavorites";
@@ -12,7 +12,7 @@ const CitySearch = () => {
   const debouncedQuery = useDebounce(query, 500);
 
   const { data = [], isLoading, error } = useCitySearch(debouncedQuery);
-  const setLocation = useAppStore((s) => s.setLocation);
+  const setLocation = useWeatherStore((s) => s.setLocation);
   const { isFavorite, toggleFavorite } = useFavorites();
 
   const handleSelectCity = (city: City) => {

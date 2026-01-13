@@ -1,4 +1,4 @@
-import { useAppStore } from "@/store/app.store";
+import { useWeatherStore } from "@/store/weather.store";
 import styles from "./FavoriteCities.module.css";
 import CityCard from "@/shared/components/CityCard/CityCard";
 import { useFavorites } from "../hook/useFavorites";
@@ -6,7 +6,7 @@ import { useThrottle } from "@/shared/hooks/useThrottle";
 import type { City } from "@/shared/type";
 
 const FavoriteCities = () => {
-  const setLocation = useAppStore((s) => s.setLocation);
+  const setLocation = useWeatherStore((s) => s.setLocation);
   const { favorites, toggleFavorite } = useFavorites();
 
   const handleSelectCity = (city: City) => {

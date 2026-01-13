@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { getCity } from "../services/forecast.api";
 import { mapCitySearchResponse } from "../utils/mapCitySearch";
+import { getCity } from "../services/city-search.api";
 
 export const useCitySearch = (query: string) => {
   return useQuery({
     queryKey: ["city-search", query],
-    queryFn: async () => {
-      const res = await getCity(query);
+    queryFn: async ({ signal }) => {
+      const res = await getCity(query, signal);
       return mapCitySearchResponse(res);
     },
     enabled: query.length >= 3,

@@ -1,9 +1,11 @@
 import { useDebounce } from "@/shared/hooks/useDebounce";
 import { Autocomplete } from "@/shared/components/ui/autocomplete/Autocomplete";
-import { useState } from "react";
-import { useAppStore, type City } from "@/store/app.store";
-import CityCard from "@/shared/components/CityCard";
+import { useCallback, useState } from "react";
+import { useAppStore } from "@/store/app.store";
+import CityCard from "@/shared/components/CityCard/CityCard";
 import { useCitySearch } from "../hooks/useCitySearch";
+import { useFavorites } from "../../fovarite-cities/hook/useFavorites";
+import type { City } from "@/shared/type";
 
 const CitySearch = () => {
   const [query, setQuery] = useState("");
@@ -11,16 +13,23 @@ const CitySearch = () => {
 
   const { data = [], isLoading, error } = useCitySearch(debouncedQuery);
   const setLocation = useAppStore((s) => s.setLocation);
-  const favorites = useAppStore((s) => s.favorites);
-  const toggleFavorite = useAppStore((s) => s.toggleFavorite);
-
-  const isFavorite = (lat: number, lon: number) =>
-    favorites.some((fav) => fav.lat === lat && fav.lon === lon);
+  const { isFavorite, toggleFavorite } = useFavorites();
 
   const handleSelectCity = (city: City) => {
     setLocation({ lat: city.lat, lon: city.lon }, "search");
     setQuery("");
   };
+
+  const renderCity = useCallback(
+    (city: City) => (
+      <CityCard
+        city={city}
+        favorite={isFavorite(city.lat, city.lon)}
+        onToggleFavorite={toggleFavorite}
+      />
+    ),
+    [isFavorite, toggleFavorite]
+  );
 
   return (
     <Autocomplete
@@ -32,13 +41,7 @@ const CitySearch = () => {
       getKey={(city) => `${city.lat}-${city.lon}`}
       placeholder="Search city"
       onSelect={handleSelectCity}
-      renderItem={(city) => (
-        <CityCard
-          city={city}
-          favorite={isFavorite(city.lat, city.lon)}
-          onToggleFavorite={toggleFavorite}
-        />
-      )}
+      renderItem={(city) => renderCity(city)}
     />
   );
 };

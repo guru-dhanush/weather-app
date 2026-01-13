@@ -21,20 +21,20 @@ body {
 }
 
 :root {
-  --bg: #f7f7f7;
-  --card-bg: #ffffff;
+  --bg: #ffffff;
+  --card-bg: #f7f7f7;
   --text: #1a1a1a;
   --muted-text: #6b6b6b;
   --border: #e5e5e5;
   --primary: #c7602598;
 
-  --radius: 12px;
+  --radius: 14px;
 
-  --space-1: 0.125rem; /* 2px */
-  --space-2: 0.25rem; /* 4px */
-  --space-3: 0.5rem; /* 8px */
-  --space-4: 0.75rem; /* 12px */
-  --space-5: 1rem; /* 16px */
+  --space-1: 0.125rem;
+  --space-2: 0.25rem;
+  --space-3: 0.5rem;
+  --space-4: 0.75rem;
+  --space-5: 1rem;
 }
 
 [data-theme="dark"] {
@@ -45,71 +45,21 @@ body {
   --border: #2a2a2a;
 }
 
-button {
-  font-family: inherit;
-  cursor: pointer;
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.4) transparent;
 }
 
-input {
-  font-family: inherit;
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
 
-img {
-  max-width: 100%;
-  display: block;
+*::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-.dashboard {
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto 1fr;
-  grid-template-areas:
-    "header"
-    "main";
-}
-
-.header {
-  grid-area: header;
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-}
-
-.main {
-  grid-area: main;
-  padding: 16px;
-  background: var(--bg);
-}
-
-.star {
-  width: 20px;
-  aspect-ratio: 1;
-  background: var(--card-bg);
-  clip-path: polygon(
-    50% 0,
-    calc(50% * (1 + sin(0.4turn))) calc(50% * (1 - cos(0.4turn))),
-    calc(50% * (1 - sin(0.2turn))) calc(50% * (1 - cos(0.2turn))),
-    calc(50% * (1 + sin(0.2turn))) calc(50% * (1 - cos(0.2turn))),
-    calc(50% * (1 - sin(0.4turn))) calc(50% * (1 - cos(0.4turn)))
-  );
-  margin: 10px;
-}
-
-.favorite {
-  background: #f8ca00;
-}
-
-.city-info {
-  display: flex;
-}
-
-.city-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 10px;
 }

@@ -1,4 +1,4 @@
-import type { City } from "@/store/app.store";
+import type { City } from "@/shared/type";
 
 export const mapCitySearchResponse = (apiResponse: any): City[] => {
   if (!apiResponse?.list) return [];

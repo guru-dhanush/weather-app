@@ -1,6 +1,7 @@
 .autocomplete {
   position: relative;
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
 }
 
 .autocomplete input {
@@ -27,7 +28,7 @@
 }
 
 .item {
-  padding: 10px;
+  padding: 2px;
   cursor: pointer;
   display: flex;
   gap: 8px;
@@ -36,6 +37,7 @@
 
 .item:hover {
   background-color: VAR(--primary);
+  border-radius: var(--radius);
 }
 
 .active {

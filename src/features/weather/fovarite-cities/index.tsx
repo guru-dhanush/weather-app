@@ -1,7 +1,12 @@
+import { ErrorBoundary } from "@/shared/components/ErrorBoundary/ErrorBoundary";
 import FavoriteCities from "./components/FavoriteCities";
 
-const index = () => {
-  return <FavoriteCities />;
+const Favorites = () => {
+  return (
+    <ErrorBoundary fallback={<div>Failed to load favorites</div>}>
+      <FavoriteCities />
+    </ErrorBoundary>
+  );
 };
 
-export default index;
+export default Favorites;

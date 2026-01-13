@@ -1,19 +1,21 @@
 import { useTheme } from "@/shared/context/ThemeContext";
-import { Button } from "../ui/button/Button";
 import styles from "./ThemeToggle.module.css";
 
 const ThemeToggle = () => {
   const { theme, toggleTheme } = useTheme();
+  const isDark = theme === "dark";
 
   return (
-    <Button
-      className={`${styles.switch} ${theme === "dark" ? styles.dark : ""}`}
-      onClick={toggleTheme}
-      aria-label="Toggle theme"
-      size="sm"
-    >
-      <span className={styles.knob} />
-    </Button>
+    <label className={styles.switch}>
+      <input
+        type="checkbox"
+        checked={isDark}
+        onChange={toggleTheme}
+        aria-label="Toggle theme"
+      />
+      <span className={`${styles.slider} ${styles.round}`} />
+    </label>
   );
 };
+
 export default ThemeToggle;

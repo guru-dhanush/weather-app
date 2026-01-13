@@ -1,18 +1,33 @@
 .card {
-  background-color: var(--card-bg);
   border-radius: var(--radius);
-  padding: var(--space-4);
   border: 1px solid var(--border);
-
+  background: var(--card-bg);
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
-
+  height: fit-content;
   width: 100%;
+  justify-content: space-between;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.header div {
+  display: flex;
+  justify-content: space-between;
+}
+.content {
+  background: var(--bg);
+  padding: var(--space-5);
+  border-radius: var(--radius);
+  border: 0.5px solid var(--border);
 }
 
 .city {
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   font-weight: 600;
   color: var(--text);
 }
@@ -23,27 +38,59 @@
   text-transform: capitalize;
 }
 
-.main {
+.temperatureBlock {
   display: flex;
-  align-items: center;
-  gap: var(--space-3);
+  flex-direction: column;
+  gap: var(--space-1);
 }
 
 .temp {
-  font-size: 3rem;
+  font-size: 3.25rem;
   font-weight: 700;
   color: var(--text);
   line-height: 1;
 }
 
-.icon {
-  width: 64px;
-  height: 64px;
+.feelsLike {
+  font-size: 0.875rem;
+  color: var(--muted-text);
+}
+
+.range {
+  display: flex;
+  margin: 10px 0px;
+  gap: 10px;
 }
 
 .meta {
   display: flex;
-  justify-content: space-between;
-  font-size: 0.875rem;
+  gap: 1.25rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 0.875rem;
+  padding-bottom: 0.875rem;
+}
+
+.meta div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.label {
+  font-size: 0.75rem;
   color: var(--muted-text);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.divider {
+  height: 1.75rem;
+  width: 1px;
+  background-color: #e5e7eb;
+}
+
+.temp_cloud {
+  display: flex;
+  align-items: center;
 }

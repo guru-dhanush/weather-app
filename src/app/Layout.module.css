@@ -1,0 +1,43 @@
+.dashboard {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "header"
+    "main";
+  overflow-x: hidden;
+}
+
+.header {
+  grid-area: header;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+}
+
+.main {
+  padding: var(--space-5);
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media (min-width: 1440px) {
+  .main {
+    padding-left: var(--space-6, 2rem);
+    padding-right: var(--space-6, 2rem);
+  }
+}

@@ -1,0 +1,31 @@
+.card {
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background-color: var(--card-bg);
+}
+
+.header {
+  padding: 1.25rem 1.5rem;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.desc {
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: var(--muted-text);
+}
+
+.body {
+  padding: 0rem 1rem 1rem 1rem;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}

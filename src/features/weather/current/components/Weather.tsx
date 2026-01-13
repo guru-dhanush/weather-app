@@ -1,17 +1,41 @@
 import { WeatherCard } from "./WeatherCard";
-import type { Location } from "../../../../shared/type";
+import {
+  TEMPERATURE_UNIT_MAP,
+  type Location,
+  type WeatherUnit,
+} from "../../../../shared/type";
 import { useCurrentWeather } from "../hooks/useCurrentWeather";
+import WeatherCardSkeleton from "./WeatherCardSkeleton";
+import { useFavorites } from "../../fovarite-cities/hook/useFavorites";
+import { InlineError } from "@/shared/components/InlineError";
 
-const CurrentWeather = ({ location }: { location: Location }) => {
-  const { data, isLoading } = useCurrentWeather(location);
+const CurrentWeather = ({
+  location,
+  unit,
+}: {
+  location: Location;
+  unit: WeatherUnit;
+}) => {
+  const { data, isLoading, isError } = useCurrentWeather(location, unit);
+  const { isFavorite, toggleFavorite } = useFavorites();
 
-  if (isLoading) return <div>Loading...</div>;
-  if (!data) return null;
+  if (isLoading) return <WeatherCardSkeleton />;
+  if (!data || isError) {
+    return (
+      <InlineError
+        title="Unable to load current weather"
+        description="Please try again in a moment."
+      />
+    );
+  }
 
   return (
-    <div>
-      <WeatherCard data={data} />
-    </div>
+    <WeatherCard
+      data={data}
+      temperatureUnitSymbol={TEMPERATURE_UNIT_MAP[unit]}
+      isFavorite={isFavorite(data.location.lat, data.location.lon)}
+      toggleFavorite={toggleFavorite}
+    />
   );
 };
 

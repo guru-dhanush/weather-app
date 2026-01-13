@@ -1,37 +1,34 @@
-export type WeatherCondition =
-  | "sunny"
-  | "cloudy"
-  | "rainy"
-  | "snowy"
-  | "stormy"
-  | "unknown";
+export type WindDirection = "N" | "NE" | "E" | "SE" | "S" | "SW" | "W" | "NW";
 
-export interface WeatherCardData {
-  cityName: string;
-  country: string;
-  temperature: number; // in °C
-  condition: WeatherCondition;
-  humidity: number;
-  windSpeed: number; // km/h
-  icon: string;
-}
-
-export interface WeatherApiResponse {
-  name: string;
-  sys: {
+export interface WeatherUIData {
+  location: {
+    city: string;
     country: string;
+    lat: number;
+    lon: number;
   };
-  main: {
-    temp: number;
+
+  current: {
+    temperature: number;
+    feelsLike: number;
+    minTemp: number;
+    maxTemp: number;
     humidity: number;
+    visibilityKm: number;
   };
-  weather: Array<{
-    id: number;
+
+  condition: {
     main: string;
     description: string;
     icon: string;
-  }>;
+    isDay: boolean;
+  };
+
   wind: {
-    speed: number;
+    speedKmh: number;
+  };
+
+  meta: {
+    timestamp: number;
   };
 }

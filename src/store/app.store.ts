@@ -1,26 +1,23 @@
 import { DEFAULT_LOCATION } from "@/shared/constant/constant";
-import type { Location } from "@/shared/type";
+import type {
+  Location,
+  LocationSource,
+  WeatherUnit,
+  City,
+} from "@/shared/type";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-
-export type LocationSource = "default" | "geo" | "search" | "favorite";
-
-export interface City extends Location {
-  name: string;
-  country: string;
-  icon: string;
-  temp: number;
-  condition: string;
-}
 
 interface WeatherStore {
   selectedLocation: Location;
   source: LocationSource;
   favorites: City[];
+  unit: WeatherUnit;
 
   setLocation: (location: Location, source: LocationSource) => void;
   toggleFavorite: (city: City) => void;
   isFavorite: (lat: number, lon: number) => boolean;
+  setUnit: (unit: WeatherUnit) => void;
 }
 
 export const useAppStore = create<WeatherStore>()(
@@ -29,6 +26,7 @@ export const useAppStore = create<WeatherStore>()(
       selectedLocation: DEFAULT_LOCATION,
       source: "default",
       favorites: [],
+      unit: "imperial",
 
       setLocation: (location, source) =>
         set({
@@ -36,31 +34,38 @@ export const useAppStore = create<WeatherStore>()(
           source,
         }),
 
-      toggleFavorite: (City) =>
+      setUnit: (unit) =>
+        set({
+          unit,
+        }),
+
+      toggleFavorite: (city) =>
         set((state) => {
+          const { lat, lon, name, icon, country } = city;
+
           const exists = state.favorites.some(
-            (fav) => fav.lat === City.lat && fav.lon === City.lon
+            (fav) => fav.lat === city.lat && fav.lon === city.lon
           );
 
           return {
             favorites: exists
               ? state.favorites.filter(
-                  (fav) => fav.lat !== City.lat || fav.lon !== City.lon
+                  (fav) => fav.lat !== city.lat || fav.lon !== city.lon
                 )
-              : [...state.favorites, City],
+              : [...state.favorites, { lat, lon, name, icon, country }],
           };
         }),
 
-      isFavorite: (lat, lon) => {
-        return get().favorites.some(
-          (fav) => fav.lat === lat && fav.lon === lon
-        );
-      },
+      isFavorite: (lat, lon) =>
+        get().favorites.some((fav) => fav.lat === lat && fav.lon === lon),
     }),
     {
       name: "weather-store",
       partialize: (state) => ({
+        selectedLocation: state.selectedLocation,
+        source: state.source,
         favorites: state.favorites,
+        unit: state.unit,
       }),
     }
   )

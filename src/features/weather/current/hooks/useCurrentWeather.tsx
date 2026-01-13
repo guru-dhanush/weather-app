@@ -1,19 +1,24 @@
 import { useQuery } from "@tanstack/react-query";
 import { getCurrentWeather } from "../services/current-weather.api";
-import { mapWeatherToCard } from "../utils/mapWeatherToCard";
-import type { Location } from "../../../../shared/type";
+import type { Location, WeatherUnit } from "../../../../shared/type";
+import type { WeatherUIData } from "../types/weather.types";
+import { mapWeatherToUI } from "../utils/mapWeatherToUI";
 
-export const useCurrentWeather = (location: Location) => {
-  return useQuery({
-    queryKey: ["current-weather", location?.lat, location?.lon],
+export const useCurrentWeather = (location: Location, unit: WeatherUnit) => {
+  return useQuery<WeatherUIData>({
+    queryKey: ["current-weather", location.lat, location.lon, unit],
 
-    queryFn: async () => {
-      const { lat, lon } = location;
-      const apiResponse = await getCurrentWeather(lat, lon);
-      return mapWeatherToCard(apiResponse);
+    queryFn: async ({ signal }) => {
+      const apiResponse = await getCurrentWeather(
+        location.lat,
+        location.lon,
+        unit,
+        signal
+      );
+      return mapWeatherToUI(apiResponse, unit);
     },
 
-    enabled: !!location?.lat && !!location?.lon,
+    enabled: Boolean(location?.lat && location?.lon),
     staleTime: 5 * 60 * 1000,
     gcTime: 10 * 60 * 1000,
     retry: 2,

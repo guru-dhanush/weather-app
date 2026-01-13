@@ -1,36 +1,40 @@
-import { useAppStore, type City } from "@/store/app.store";
+import { useAppStore } from "@/store/app.store";
 import styles from "./FavoriteCities.module.css";
-import CityCard from "@/shared/components/CityCard";
+import CityCard from "@/shared/components/CityCard/CityCard";
+import { useFavorites } from "../hook/useFavorites";
+import { useThrottle } from "@/shared/hooks/useThrottle";
+import type { City } from "@/shared/type";
 
 const FavoriteCities = () => {
-  const favorites = useAppStore((s) => s.favorites);
   const setLocation = useAppStore((s) => s.setLocation);
-  const toggleFavorite = useAppStore((s) => s.toggleFavorite);
-
-  if (!favorites.length) {
-    return <div className={styles.empty}>No favorite cities ⭐</div>;
-  }
+  const { favorites, toggleFavorite } = useFavorites();
 
   const handleSelectCity = (city: City) => {
     setLocation({ lat: city.lat, lon: city.lon }, "favorite");
   };
 
-  return (
-    <div className={styles.wrapper}>
-      <h3 className={styles.title}>Favorite Cities</h3>
+  const throttleHandleSelect = useThrottle(handleSelectCity, 500);
 
-      <div className={styles.list}>
-        {favorites.map((city) => (
+  if (!favorites.length) {
+    // return <div className={styles.empty}>No favorite cities ⭐</div>;
+    return null;
+  }
+
+  return (
+    <section className={styles.carousel}>
+      {favorites.map((city) => (
+        <div className={styles.card} key={`${city.lat}-${city.lon}`}>
           <CityCard
-            key={`${city.lat}-${city.lon}`}
             city={city}
+            size="sm"
+            width={280}
             favorite={true}
-            onSelect={handleSelectCity}
+            onSelect={throttleHandleSelect}
             onToggleFavorite={toggleFavorite}
           />
-        ))}
-      </div>
-    </div>
+        </div>
+      ))}
+    </section>
   );
 };
 

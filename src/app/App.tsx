@@ -1,17 +1,19 @@
+import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "@/app/Layout";
-import { initLocation } from "@/shared/hooks/useCurrentLocation";
-import { useEffect } from "react";
 import WeatherPage from "@/pages/Weather";
+import { ErrorBoundary } from "@/shared/components/ErrorBoundary/ErrorBoundary";
 
 const App = () => {
-  useEffect(() => {
-    initLocation();
-  }, []);
-
   return (
-    <Layout>
-      <WeatherPage />
-    </Layout>
+    <ErrorBoundary>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/dashboard" element={<WeatherPage />} />
+          <Route path="*" element={<Navigate to="/dashboard" replace />} />
+        </Routes>
+      </Layout>
+    </ErrorBoundary>
   );
 };
 

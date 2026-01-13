@@ -1,41 +1,42 @@
-.wrapper {
+.carousel {
   display: flex;
-  flex-direction: column;
-  height: 320px;
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 0.75rem;
-}
-
-.title {
-  font-size: 0.9rem;
-  margin-bottom: 0.5rem;
-}
-
-.list {
-  flex: 1;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.list {
+  gap: var(--space-3);
+  overflow-x: auto;
   scroll-behavior: smooth;
+
+  scrollbar-width: none;
+  anchor-name: --carousel;
+  scroll-snap-type: x mandatory;
+  margin: 0px 10px;
 }
 
-.list::-webkit-scrollbar {
-  width: 6px;
+.carousel::scroll-button(right),
+.carousel::scroll-button(left) {
+  content: "→";
+  background-color: #1e1e1e;
+  font-family: Consolas;
+  font-size: 1.5rem;
+  color: white;
+  height: 30px;
+  width: 30px;
+  border-radius: var(--radius);
+  border: none;
+  padding-bottom: 0.1em;
+  cursor: pointer;
+  position: fixed;
+  position-anchor: --carousel;
+  position-area: right center;
+}
+.carousel::scroll-button(left) {
+  content: "←";
+  position-area: left center;
+}
+.carousel::scroll-button(right):disabled,
+.carousel::scroll-button(left):disabled {
+  opacity: 0.5;
+  cursor: auto;
 }
 
-.list::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
-}
-
-.empty {
-  padding: 1rem;
-  text-align: center;
-  color: var(--muted-text);
+.card {
+  scroll-snap-align: start;
 }

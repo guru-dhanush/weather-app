@@ -1,52 +1,49 @@
 .list {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(120px, 1fr);
-  gap: var(--space-3);
-
-  overflow-x: auto;
-  padding-bottom: var(--space-2);
-
-  scrollbar-width: thin;
-}
-
-.list::-webkit-scrollbar {
-  height: 6px;
-}
-
-.list::-webkit-scrollbar-thumb {
-  background-color: var(--border);
-  border-radius: 4px;
+  display: flex;
+  gap: 1rem;
+  overflow-x: scroll;
 }
 
 .card {
-  background-color: var(--card-bg);
+  background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-
-  padding: var(--space-3);
-
+  padding: 1rem;
+  text-align: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: var(--space-2);
-
-  text-align: center;
-  min-width: 120px;
+  gap: 0.5rem;
+  flex-grow: 1;
+  min-width: 150px;
+  flex-grow: 1;
 }
 
 .date {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
 }
 
-.icon {
-  width: 48px;
-  height: 48px;
+.day {
+  font-weight: 600;
+}
+
+.fullDate {
+  font-size: 0.8rem;
+  color: var(--muted-text);
+}
+
+.condition {
+  font-size: 0.9rem;
+  color: var(--muted-text);
 }
 
 .temp {
-  font-size: 0.875rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.temp span {
   color: var(--muted-text);
 }

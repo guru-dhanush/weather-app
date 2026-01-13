@@ -1,0 +1,89 @@
+.list {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+}
+
+.card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.date {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.day,
+.fullDate,
+.condition,
+.tempMax,
+.tempMin,
+.icon {
+  background: linear-gradient(
+    90deg,
+    var(--border) 25%,
+    rgba(255, 255, 255, 0.4) 37%,
+    var(--border) 63%
+  );
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease infinite;
+  border-radius: 6px;
+}
+
+/* Sizes */
+.day {
+  height: 14px;
+  width: 60px;
+}
+
+.fullDate {
+  height: 12px;
+  width: 80px;
+}
+
+.icon {
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+  align-self: center;
+  margin: 0.25rem 0;
+}
+
+.condition {
+  height: 14px;
+  width: 90px;
+  align-self: center;
+}
+
+.temp {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.tempMax {
+  height: 16px;
+  width: 30px;
+}
+
+.tempMin {
+  height: 14px;
+  width: 28px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}

@@ -1,18 +1,30 @@
 import ForecastCard from "./ForecastList";
-import type { Location } from "../../../../shared/type";
+import type { Location, WeatherUnit } from "../../../../shared/type";
 import { useForecastWeather } from "../hooks/useForecastWeather";
+import ForecastListSkeleton from "./ForecastListSkeleton";
+import { InlineError } from "@/shared/components/InlineError";
 
-const ForecastWeather = ({ location }: { location: Location }) => {
-  const { data, isLoading } = useForecastWeather(location);
+const ForecastWeather = ({
+  location,
+  unit,
+}: {
+  location: Location;
+  unit: WeatherUnit;
+}) => {
+  const { data, isLoading, isError } = useForecastWeather(location, unit);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <ForecastListSkeleton />;
   if (!data) return null;
+  if (isError) {
+    return (
+      <InlineError
+        title="Unable to load weather forecast"
+        description="Please try again in a moment."
+      />
+    );
+  }
 
-  return (
-    <div>
-      <ForecastCard data={data} />
-    </div>
-  );
+  return <ForecastCard data={data} />;
 };
 
 export default ForecastWeather;

@@ -16,7 +16,7 @@ const FavoriteCities = () => {
   const throttleHandleSelect = useThrottle(handleSelectCity, 500);
 
   if (!favorites.length) {
-    // return <div className={styles.empty}>No favorite cities ⭐</div>;
+    // return <div className={styles.empty}>No favorite cities </div>;
     return null;
   }
 

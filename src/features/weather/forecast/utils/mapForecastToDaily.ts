@@ -9,7 +9,7 @@ export const mapForecastToDaily = (
   const dailyMap = new Map<string, DailyForecast>();
 
   apiData.list.forEach((item) => {
-    const date = item.dt_txt.split(" ")[0]; // YYYY-MM-DD
+    const date = item.dt_txt.split(" ")[0]; 
 
     const min = Math.round(item.main.temp_min);
     const max = Math.round(item.main.temp_max);
